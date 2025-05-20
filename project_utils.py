@@ -1,7 +1,6 @@
 import Pyro5.api
 from time import time
 import logging
-import sys
 PEER_PREFIX = "peer."
 TRACKER_PREFIX = "tracker.epoch."
 PEER_DIRECTORY = "peer_data/"

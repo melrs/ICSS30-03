@@ -5,8 +5,7 @@ import Pyro5.api
 from election import Election
 from heartbeat import HeartbeatMonitor
 from project_utils import PEER_PREFIX, get_name_service, logger, call_proxy_method, bind_name, get_peer_id, get_tracker_id
-from tracker_manager import TrackerManager
-from datetime import datetime
+
 
 class Peer:
     def __init__(self, peer_id, tracker_uri=None):

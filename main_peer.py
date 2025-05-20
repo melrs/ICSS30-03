@@ -1,11 +1,7 @@
 import os
 import sys
-import threading
-from peer import Peer
-from project_utils import register_object, logger, call_proxy_method, get_name_service, get_peer_id, PEER_DIRECTORY
-from tracker_manager import TrackerManager
-import Pyro5.api
-import json
+from project_utils import call_proxy_method, get_peer_id, PEER_DIRECTORY
+from lauch_peer import launch_peer_instance
 import base64
 
 
@@ -63,21 +59,7 @@ def user_menu(peer):
         else:
             print("Invalid option. Please choose 1, 2, or 3.")
 
-
 if __name__ == "__main__":
-    logger.debug("Starting peer application")
-    peer_id = sys.argv[1];                                                                      
-    
-    daemon = Pyro5.api.Daemon();                                                                    
-    logger.debug("Pyro5 daemon created")
-
-    peer = Peer(peer_id)
-    peer_uri = register_object(peer, daemon);                            
-    logger.debug(f"Peer registered with URI: {peer_uri}")
-    
-    #TrackerManager.initialize_peer_monitoring(peer, tracker_uri)
-    peer.register_with_tracker(TrackerManager.lookup_tracker());                                                                  
-    logger.debug(f"[{peer_id}] Registered with tracker");         
-    threading.Thread(target=daemon.requestLoop, daemon=True).start()
+    peer = launch_peer_instance(sys.argv[1])
     user_menu(peer);
 
