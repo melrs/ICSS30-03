@@ -1,42 +1,51 @@
-import Pyro5.api
+import threading
+from typing import List
+import Pyro5
 from project_utils import get_name_service, logger, call_proxy_method
 
 class Election:
     def __init__(self, peer, epoch):
         self.ns = get_name_service()
-        self.candidates = [k for k in self.ns.list().keys() if k.startswith("peer.")]
+        self.election_in_progress = False
+        self.candidates = self.ns.list(prefix="peer.").values()
         self.peer = peer
         self.epoch = epoch
-        logger.debug(f"Election initialized with peer_id={peer.id}, epoch={epoch}, candidates={self.candidates}")
+        self.peers_lock = threading.Lock()
+        logger(__name__, self.status(), f"Election initialized with peer_id={peer.id}, epoch={epoch}, candidates={self.candidates}")
 
-    def execute(self):
-        votes = 0 
-        logger.debug(f"Starting election with {len(self.candidates)} candidates")
-        if f"peer.{self.peer.id}" not in self.candidates:
-            logger.debug(f"Peer {self.peer.id} not in candidates list, aborting election.")
-            return False
-
-        quorum = (len(self.candidates) // 2) + 1
-        logger.debug(f"Quorum calculated as {quorum}")
         
-        for name in self.candidates:
+    def _get_peers(self) -> List[str]:
+        with self.peers_lock:
             try:
-                logger.debug(f"Attempting to contact candidate {name}")
-                if name == f"peer.{self.peer.id}":
-                    if self.peer.vote(self.epoch):
-                        votes += 1
-                        logger.debug(f"Vote received from self ({name})")
-                    else:
-                        logger.debug(f"Vote denied by self ({name})")
-                    continue
-                if call_proxy_method(self.ns.lookup(name), function=lambda p: p.vote(self.epoch)):
-                    votes += 1
-                    logger.debug(f"Vote received from {name}")
-                else:
-                    logger.debug(f"Vote denied by {name}")
-            except Exception as e:
-                logger.debug(f"Failed to contact {name}: {e}")
-                continue
+                return [uri for uri in get_name_service().list(prefix="Peer_").values()] # Testar com keys para pegar os names
+            except Pyro5.errors.NamingError:
+                return []
+            
+    def status(self):
+        return 'PEER'
         
-        logger.debug(f"Total votes: {votes}, Quorum: {quorum}")
-        return votes >= quorum
+    def execute(self) -> None:
+        if self.election_in_progress:
+            return
+
+        self.election_in_progress = True
+        try:
+            peers = self._get_peers()
+            votes = 1  # self-vote
+
+            for peer_uri in peers:
+                try:
+                    if call_proxy_method(peer_uri, function=lambda proxy: proxy.vote(self.epoch)):
+                        votes += 1
+                        logger(__name__, self.status(), f"Vote received from {peer_uri}")
+                except Pyro5.errors.CommunicationError:
+                    continue
+
+            if votes > (len(peers) // 2):
+                self.election_in_progress = False
+                return True
+            else:
+                print(f"Election failed. Waiting for new leader...")
+                
+        finally:
+            self.election_in_progress = False

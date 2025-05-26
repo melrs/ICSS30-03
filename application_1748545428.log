@@ -1,0 +1,21 @@
+2025-05-29 16:03:48,110 [DEBUG] [__main__]: [PEER] Starting peer application
+2025-05-29 16:03:48,115 [DEBUG] [peer]: [PEER] [peer2] Peer directory created: peer_data/peer2
+2025-05-29 16:03:48,119 [DEBUG] [peer]: [PEER] [peer2] Peer registered with name: peer.peer2, URI: PYRO:obj_64a0cfdb6e6046b292af5fe1c2b4cb75@localhost:64014
+2025-05-29 16:03:48,121 [DEBUG] [tracker_manager]: Tracker found: tracker.epoch.1 uri: PYRO:obj_8d45b57db52b4c118996675fa02fbc1d@localhost:63865
+2025-05-29 16:03:48,123 [DEBUG] [peer]: [PEER] [peer2] Tracker URI found: PYRO:obj_8d45b57db52b4c118996675fa02fbc1d@localhost:63865
+2025-05-29 16:03:48,220 [DEBUG] [peer]: [PEER] [peer2] Registered with tracker: tracker.epoch.1
+2025-05-29 16:03:48,324 [DEBUG] [peer]: [PEER] [peer2] Current epoch set to: 1
+2025-05-29 16:03:48,325 [DEBUG] [peer]: [PEER] [peer2] Tracker found: PYRO:obj_8d45b57db52b4c118996675fa02fbc1d@localhost:63865
+2025-05-29 16:04:28,203 [DEBUG] [peer]: [PEER] [peer2] Updating epoch to: 2
+2025-05-29 16:04:28,210 [DEBUG] [peer]: [PEER] Updating tracker name to: tracker.epoch.2
+2025-05-29 16:04:46,230 [DEBUG] [peer]: [PEER] [peer2] Updating epoch to: 3
+2025-05-29 16:04:46,234 [DEBUG] [peer]: [PEER] Updating tracker name to: tracker.epoch.3
+2025-05-29 16:05:06,201 [DEBUG] [peer]: [PEER] [peer2] Promoting to tracker due to heartbeat timeout.
+2025-05-29 16:05:06,202 [DEBUG] [peer]: [PEER] [peer2] Starting election with epoch: 4
+2025-05-29 16:05:06,205 [DEBUG] [election]: [PEER] Election initialized with peer_id=peer2, epoch=4, candidates=dict_values(['PYRO:obj_8d45b57db52b4c118996675fa02fbc1d@localhost:63865', 'PYRO:obj_64a0cfdb6e6046b292af5fe1c2b4cb75@localhost:64014', 'PYRO:obj_a248e67aa0784451b5d20c22a9f80664@localhost:64195', 'PYRO:obj_d5dcd73b95ff416692008babc50f438b@localhost:64492', 'PYRO:obj_f8821c50245d4ecc9d0c107c9fd5a8a9@localhost:64680'])
+2025-05-29 16:05:06,208 [DEBUG] [peer]: [PEER] [peer2] Election successful. Promoting to tracker.
+2025-05-29 16:05:06,211 [DEBUG] [peer]: [TRACKER] [peer2] [epoch: 4] Elected as new tracker with name: tracker.epoch.4
+2025-05-29 16:05:06,215 [DEBUG] [peer]: [TRACKER] [peer2] Removed files for peer: peer.peer1
+2025-05-29 16:05:06,215 [DEBUG] [peer]: [TRACKER] [peer2] Removed files for peer: peer.peer3
+2025-05-29 16:05:06,216 [DEBUG] [peer]: [TRACKER] [peer2] Removed files for peer: peer.peer4
+2025-05-29 16:05:06,217 [DEBUG] [peer]: [TRACKER] [peer2] Removed files for peer: peer.peer5

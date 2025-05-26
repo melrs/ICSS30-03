@@ -1,0 +1,9 @@
+2025-05-29 16:03:57,784 [DEBUG] [__main__]: [PEER] Starting peer application
+2025-05-29 16:03:57,805 [DEBUG] [peer]: [PEER] [peer3] Peer directory created: peer_data/peer3
+2025-05-29 16:03:57,817 [DEBUG] [peer]: [PEER] [peer3] Peer registered with name: peer.peer3, URI: PYRO:obj_a248e67aa0784451b5d20c22a9f80664@localhost:64195
+2025-05-29 16:03:57,822 [DEBUG] [tracker_manager]: Tracker found: tracker.epoch.1 uri: PYRO:obj_8d45b57db52b4c118996675fa02fbc1d@localhost:63865
+2025-05-29 16:03:57,825 [DEBUG] [peer]: [PEER] [peer3] Tracker URI found: PYRO:obj_8d45b57db52b4c118996675fa02fbc1d@localhost:63865
+2025-05-29 16:03:57,860 [DEBUG] [peer]: [PEER] [peer3] Registered with tracker: tracker.epoch.1
+2025-05-29 16:03:57,963 [DEBUG] [peer]: [PEER] [peer3] Current epoch set to: 1
+2025-05-29 16:03:57,963 [DEBUG] [peer]: [PEER] [peer3] Tracker found: PYRO:obj_8d45b57db52b4c118996675fa02fbc1d@localhost:63865
+2025-05-29 16:04:02,110 [DEBUG] [__main__]: [PEER] [peer3] Exiting peer application
