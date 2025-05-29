@@ -18,9 +18,7 @@ class Peer:
         self.timer = None
         self.files = self._load_files()
         self.election = None
-        #tracker atributes
         self.file_index = {}
-        self.peers = [] # # pega todos os peers do ns
         self.lock = threading.Lock()
         self.heartbeater = None
         self._stop_heartbeat = threading.Event()
@@ -54,7 +52,7 @@ class Peer:
                 self.tracker = Pyro5.api.Proxy(tracker_uri)
                 self.tracker.new_peer(get_peer_name(self.id), list(self.files))
                 logger(__name__, self.status(), f"[{self.id}] Registered with tracker: {tracker_name}")
-                time.sleep(0.1)  # Wait for tracker to process the new peer
+                time.sleep(0.1)
                 self.epoch = get_epoch_from_name(tracker_name)
                 logger(__name__, self.status(), f"[{self.id}] Current epoch set to: {self.epoch}")
                 self.tracker_name = tracker_name
@@ -78,7 +76,7 @@ class Peer:
         self.reset_monitor()
         self.election_running = True
         if epoch > self.epoch:
-            self.epoch = epoch # pro tracker n variar durante eleição
+            self.epoch = epoch
             logger(__name__, self.status(), f"[{self.id}] Vote accepted for epoch: {epoch}")
             return True
         logger(__name__, self.status(), f"[{self.id}] Vote denied for epoch: {epoch}, current epoch: {self.epoch}")
@@ -89,7 +87,7 @@ class Peer:
         if self.timer and self.timer.is_alive():
             self.timer.cancel()
         
-        timeout = random.uniform(2.15, 2.3)  # 150-300 ms
+        timeout = random.uniform(0.15, 0.3)  # 150-300 ms
         self.timer = threading.Timer(timeout, self.promote_tracker)
         self.timer.start()
         # logger(__name__, self.status(), f"[{self.id}] Heartbeat monitor reset with timeout: {timeout:.2f} seconds for tracker: {self.tracker_name}")
@@ -113,10 +111,10 @@ class Peer:
                 logger(__name__, self.status(), f"Failed to update tracker: {e}")
 
         if self.election and self.election.is_alive():
-            self.election.join()  # End the election thread if it's running
+            self.election.join() 
     
     @Pyro5.api.expose
-    def heartbeat(self): #executa em uma thread
+    def heartbeat(self):
         if self.heartbeater:
             self._stop_heartbeat.set()
             self.heartbeater.join()
@@ -169,13 +167,6 @@ class Peer:
         
         self.election = threading.Thread(target=election_task, daemon=True)
         self.election.start()
-
-    # @Pyro5.api.expose
-    # def add_peer(self, peer_uri, files):
-    #     with self.lock:
-    #         if peer_uri not in self.peers:
-    #             self.peers.append(peer_uri)
-    #         self.register_files(peer_uri, files)
 
     @Pyro5.api.expose
     def register_files(self, peer_name, files):

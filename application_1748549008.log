@@ -1,0 +1,16 @@
+2025-05-29 17:03:28,873 [DEBUG] [__main__]: [PEER] Starting peer application
+2025-05-29 17:03:28,878 [DEBUG] [peer]: [PEER] [peer5] Peer directory created: peer_data/peer5
+2025-05-29 17:03:28,881 [DEBUG] [peer]: [PEER] [peer5] Peer registered with name: peer.peer5, URI: PYRO:obj_b9e4742f31b245be88c54852b9edaa90@localhost:50902
+2025-05-29 17:03:28,884 [DEBUG] [tracker_manager]: Tracker found: tracker.epoch.1 uri: PYRO:obj_6b0ff6a185bc4db1908657298f15ba22@localhost:50190
+2025-05-29 17:03:28,886 [DEBUG] [peer]: [PEER] [peer5] Tracker URI found: PYRO:obj_6b0ff6a185bc4db1908657298f15ba22@localhost:50190
+2025-05-29 17:03:28,944 [DEBUG] [peer]: [PEER] [peer5] Registered with tracker: tracker.epoch.1
+2025-05-29 17:03:29,046 [DEBUG] [peer]: [PEER] [peer5] Current epoch set to: 1
+2025-05-29 17:03:29,047 [DEBUG] [peer]: [PEER] [peer5] Tracker found: PYRO:obj_6b0ff6a185bc4db1908657298f15ba22@localhost:50190
+2025-05-29 17:04:57,692 [DEBUG] [peer]: [PEER] [peer5] Promoting to tracker due to heartbeat timeout.
+2025-05-29 17:04:57,693 [DEBUG] [peer]: [PEER] [peer5] Starting election with epoch: 2
+2025-05-29 17:04:57,697 [DEBUG] [election]: [PEER] Election initialized with peer_id=peer5, epoch=2, candidates=dict_values(['PYRO:obj_6b0ff6a185bc4db1908657298f15ba22@localhost:50190', 'PYRO:obj_e510d739585b4570a3ad07336dae843b@localhost:50261', 'PYRO:obj_5f4952a1fa4c462492551cf98337f8c6@localhost:50398', 'PYRO:obj_1e87cb8222c840829fbe61c163a51c94@localhost:50729', 'PYRO:obj_b9e4742f31b245be88c54852b9edaa90@localhost:50902'])
+2025-05-29 17:04:57,699 [DEBUG] [peer]: [PEER] [peer5] Election successful. Promoting to tracker.
+2025-05-29 17:04:57,702 [DEBUG] [peer]: [TRACKER] [peer5] [epoch: 2] Elected as new tracker with name: tracker.epoch.2
+2025-05-29 17:04:57,706 [DEBUG] [peer]: [TRACKER] [peer5] Removed files for peer: peer.peer1
+2025-05-29 17:05:14,479 [DEBUG] [peer]: [TRACKER] [peer5] Showing file index: ['test_05.txt', 'test_02.txt', 'test_03.txt', 'test_04.txt']
+2025-05-29 17:10:06,537 [DEBUG] [peer]: [TRACKER] [peer5] Removed files for peer: peer.peer4

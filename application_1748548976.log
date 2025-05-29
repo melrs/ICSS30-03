@@ -1,0 +1,13 @@
+2025-05-29 17:02:56,807 [DEBUG] [__main__]: [PEER] Starting peer application
+2025-05-29 17:02:56,812 [DEBUG] [peer]: [PEER] [peer1] Peer directory created: peer_data/peer1
+2025-05-29 17:02:56,815 [DEBUG] [peer]: [PEER] [peer1] Peer registered with name: peer.peer1, URI: PYRO:obj_6b0ff6a185bc4db1908657298f15ba22@localhost:50190
+2025-05-29 17:02:56,817 [WARNING] [tracker_manager]: Tracker not found
+2025-05-29 17:02:59,017 [DEBUG] [peer]: [PEER] [peer1] Promoting to tracker due to heartbeat timeout.
+2025-05-29 17:02:59,017 [DEBUG] [peer]: [PEER] [peer1] Starting election with epoch: 1
+2025-05-29 17:02:59,021 [DEBUG] [election]: [PEER] Election initialized with peer_id=peer1, epoch=1, candidates=dict_values(['PYRO:obj_6b0ff6a185bc4db1908657298f15ba22@localhost:50190'])
+2025-05-29 17:02:59,023 [DEBUG] [peer]: [PEER] [peer1] Election successful. Promoting to tracker.
+2025-05-29 17:02:59,028 [DEBUG] [peer]: [TRACKER] [peer1] [epoch: 1] Elected as new tracker with name: tracker.epoch.1
+2025-05-29 17:03:48,560 [DEBUG] [peer]: [TRACKER] [peer1] Showing file index: ['test_01.txt', 'test_02.txt', 'test_03.txt', 'test_04.txt', 'test_05.txt']
+2025-05-29 17:04:29,561 [DEBUG] [peer]: [TRACKER] [peer1] Looking up file: test_01.txt
+2025-05-29 17:04:45,118 [DEBUG] [peer]: [TRACKER] [peer1] Peer directory created: peer_data/peer1
+2025-05-29 17:04:55,623 [DEBUG] [__main__]: [TRACKER] [peer1] Exiting peer application
