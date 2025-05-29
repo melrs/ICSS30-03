@@ -1,8 +1,22 @@
 import os
 import sys
-from project_utils import call_proxy_method, get_peer_id, PEER_DIRECTORY
-from lauch_peer import launch_peer_instance
+import threading
+import Pyro5
+from peer import Peer
+from project_utils import call_proxy_method, get_peer_name, PEER_DIRECTORY, logger, register_object
 import base64
+
+from tracker_manager import TrackerManager
+
+def status(peer_id):
+    return 'TRACKER' if peer_id.startswith("tracker") else 'PEER'
+
+def launch_peer_instance(peer_id):
+    logger(__name__, status(peer_id),"Starting peer application")
+    daemon = Pyro5.api.Daemon()                                                                
+    peer = Peer(peer_id, daemon)
+    threading.Thread(target=daemon.requestLoop, daemon=True).start()
+    return peer
 
 
 def user_menu(peer):
@@ -27,17 +41,15 @@ def user_menu(peer):
                 choice = input("Download from which peer? (type number or leave blank to cancel): ").strip()
                 if choice.isdigit() and 1 <= int(choice) <= len(owners):
                     selected_peer = owners[int(choice) - 1]
-                    file = call_proxy_method(get_peer_id(selected_peer), function=lambda t: t.get_file(filename))
+                    file = call_proxy_method(selected_peer, function=lambda t: t.get_file(filename))
                     os.makedirs(f"{PEER_DIRECTORY}{peer.id}", exist_ok=True)
                     new_file_path = f"{PEER_DIRECTORY}{peer.id}/{filename}"
                     if file:
                         with open(new_file_path, "wb") as f:
                             decoded = base64.b64decode(file['data'])
-                            print(decoded)
-                            print(decoded.decode('utf-8'))
-
                             f.write(decoded)
-                            success = call_proxy_method(peer.tracker_name, function=lambda t: t.update_index(peer.id, [filename]))
+                            print(f"File '{filename}' downloaded from {selected_peer}.")
+                            call_proxy_method(selected_peer, function=lambda p: p.update_index())
                         print(f"File '{filename}' downloaded successfully from {selected_peer}.")
                     else:
                         print(f"Failed to download file from {selected_peer}.")
@@ -54,6 +66,7 @@ def user_menu(peer):
                     print(f"  - {file}")
 
         elif option == "3":
+            logger(__name__, peer.status(),f"[{peer.id}] Exiting peer application")
             print("Exiting. Goodbye!")
             break
         else:

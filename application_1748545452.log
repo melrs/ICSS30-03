@@ -1,0 +1,20 @@
+2025-05-29 16:04:12,045 [DEBUG] [__main__]: [PEER] Starting peer application
+2025-05-29 16:04:12,051 [DEBUG] [peer]: [PEER] [peer4] Peer directory created: peer_data/peer4
+2025-05-29 16:04:12,053 [DEBUG] [peer]: [PEER] [peer4] Peer registered with name: peer.peer4, URI: PYRO:obj_d5dcd73b95ff416692008babc50f438b@localhost:64492
+2025-05-29 16:04:12,056 [DEBUG] [tracker_manager]: Tracker found: tracker.epoch.1 uri: PYRO:obj_8d45b57db52b4c118996675fa02fbc1d@localhost:63865
+2025-05-29 16:04:12,059 [DEBUG] [peer]: [PEER] [peer4] Tracker URI found: PYRO:obj_8d45b57db52b4c118996675fa02fbc1d@localhost:63865
+2025-05-29 16:04:12,119 [DEBUG] [peer]: [PEER] [peer4] Registered with tracker: tracker.epoch.1
+2025-05-29 16:04:12,225 [DEBUG] [peer]: [PEER] [peer4] Current epoch set to: 1
+2025-05-29 16:04:12,225 [DEBUG] [peer]: [PEER] [peer4] Tracker found: PYRO:obj_8d45b57db52b4c118996675fa02fbc1d@localhost:63865
+2025-05-29 16:04:28,208 [DEBUG] [peer]: [PEER] [peer4] Updating epoch to: 2
+2025-05-29 16:04:28,213 [DEBUG] [peer]: [PEER] Updating tracker name to: tracker.epoch.2
+2025-05-29 16:04:46,212 [DEBUG] [peer]: [PEER] [peer4] Promoting to tracker due to heartbeat timeout.
+2025-05-29 16:04:46,212 [DEBUG] [peer]: [PEER] [peer4] Starting election with epoch: 3
+2025-05-29 16:04:46,216 [DEBUG] [election]: [PEER] Election initialized with peer_id=peer4, epoch=3, candidates=dict_values(['PYRO:obj_8d45b57db52b4c118996675fa02fbc1d@localhost:63865', 'PYRO:obj_64a0cfdb6e6046b292af5fe1c2b4cb75@localhost:64014', 'PYRO:obj_a248e67aa0784451b5d20c22a9f80664@localhost:64195', 'PYRO:obj_d5dcd73b95ff416692008babc50f438b@localhost:64492', 'PYRO:obj_f8821c50245d4ecc9d0c107c9fd5a8a9@localhost:64680'])
+2025-05-29 16:04:46,218 [DEBUG] [peer]: [PEER] [peer4] Election successful. Promoting to tracker.
+2025-05-29 16:04:46,223 [DEBUG] [peer]: [TRACKER] [peer4] [epoch: 3] Elected as new tracker with name: tracker.epoch.3
+2025-05-29 16:04:46,226 [DEBUG] [peer]: [TRACKER] [peer4] Removed files for peer: peer.peer1
+2025-05-29 16:04:46,230 [DEBUG] [peer]: [TRACKER] [peer4] Removed files for peer: peer.peer3
+2025-05-29 16:04:46,232 [DEBUG] [peer]: [TRACKER] [peer4] Removed files for peer: peer.peer5
+2025-05-29 16:04:52,209 [DEBUG] [peer]: [TRACKER] [peer4] Showing file index: ['test_04.txt', 'test_02.txt']
+2025-05-29 16:05:04,075 [DEBUG] [__main__]: [TRACKER] [peer4] Exiting peer application
